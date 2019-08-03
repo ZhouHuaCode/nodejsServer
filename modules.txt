@@ -3,3 +3,47 @@ npm install socket.io
 腾讯云安装nodejs
 curl -sL https://rpm.nodesource.com/setup_10.x | bash -
 yum install -y nodejs
+
+gcc 5.2 安装
+[root@DS-VM-Node239 ~]# yum install centos-release-scl -y
+[root@DS-VM-Node239 ~]# yum install devtoolset-4-toolchain -y
+[root@DS-VM-Node239 ~]# scl enable devtoolset-4 bash
+[root@DS-VM-Node239 ~]# gcc --version
+
+安装redis
+	https://redis.io/download 下载
+	解压
+	tar -zxvf redis-5.0.5.tar.gz
+	保证GCC安装好
+	跳转到redis解压目录下
+	cd redis-5.0.5
+	编译安装
+	make MALLOC=libc　
+	将/usr/local/redis-4.0.6/src目录下的文件加到/usr/local/bin目录
+	cd src && make install
+	提示
+	INSTALL install
+    INSTALL install
+    INSTALL install
+    INSTALL install
+    INSTALL install
+    安装完成
+
+运行redis
+	先切换到redis src目录下
+	cd src
+
+	1. 直接启动
+	./redis-server
+	2.以后台进程方式启动redis
+	  a.修改redis.conf文件  daemonize no 改为 daemonize yes
+	  b.指定redis.conf文件启动  ./redis-server ../redis.conf
+	  c.关闭redis进程
+	    首先使用ps -aux | grep redis查看redis进程
+	    使用kill命令杀死进程
+	    [root@iZwz991stxdwj560bfmadtZ src]# ps -aux | grep redis
+		root     18714  0.0  0.1 141752  2008 ?        Ssl  13:07   0:00 ./redis-server 127.0.0.1:6379
+		root     18719  0.0  0.0 112644   968 pts/0    R+   13:09   0:00 grep --color=auto redis
+	    	kill -9 18714
+	参考： https://www.cnblogs.com/zuidongfeng/p/8032505.html
+
